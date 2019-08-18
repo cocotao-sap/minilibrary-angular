@@ -92,12 +92,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _wechat_authorization_wechat_authorization_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./wechat-authorization/wechat-authorization.component */ "./src/app/wechat-authorization/wechat-authorization.component.ts");
+/* harmony import */ var _login_page_login_page_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./login-page/login-page.component */ "./src/app/login-page/login-page.component.ts");
+
 
 
 
 
 const routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
+    { path: 'login', component: _login_page_login_page_component__WEBPACK_IMPORTED_MODULE_4__["LoginPageComponent"] },
     { path: 'wechatAuthorization', component: _wechat_authorization_wechat_authorization_component__WEBPACK_IMPORTED_MODULE_3__["WechatAuthorizationComponent"] }
 ];
 let AppRoutingModule = class AppRoutingModule {
