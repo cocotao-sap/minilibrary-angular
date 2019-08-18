@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div style=\"text-align:center; padding: 8px;\">\n<h1>\n  ngx-weui\n</h1>\n<p>\n  ngx-weui 是 WeUI 的 Angular 版本，\n  WeUI\n  是一套同微信原生视觉体验一致的基础样式库，由微信官方设计团队为微信内网页和微信小程序量身设计，令用户的使用感知更加统一。\n</p>\n<p>\n</p>\n<div style=\"margin-top: 16px;\">\n  <button weui-button>Button</button>\n</div>\n</div> -->\n\n<!-- <tab-navigator></tab-navigator> -->\n\n<app-login-page></app-login-page>\n"
+module.exports = "<!-- <div style=\"text-align:center; padding: 8px;\">\n<h1>\n  ngx-weui\n</h1>\n<p>\n  ngx-weui 是 WeUI 的 Angular 版本，\n  WeUI\n  是一套同微信原生视觉体验一致的基础样式库，由微信官方设计团队为微信内网页和微信小程序量身设计，令用户的使用感知更加统一。\n</p>\n<p>\n</p>\n<div style=\"margin-top: 16px;\">\n  <button weui-button>Button</button>\n</div>\n</div> -->\n\n<!-- <tab-navigator></tab-navigator> -->\n\n<app-login-page></app-login-page>\n<app-wechat-authorization></app-wechat-authorization>\n"
 
 /***/ }),
 
@@ -74,7 +74,7 @@ module.exports = "<weui-tabbar>\n    <weui-tab heading=\"微信\" [badge]=\"8\" 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>wechat-authorization works!</p>\n"
+module.exports = "<!-- <p>wechat-authorization works!</p> -->\n"
 
 /***/ }),
 

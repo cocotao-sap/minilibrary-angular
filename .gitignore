@@ -1,6 +1,5 @@
 /frontend/package-lock.json
 /backend/package-lock.json
 /frontend/node_modules
-/frontend/dist
 /backend/node_modules
 /.project
