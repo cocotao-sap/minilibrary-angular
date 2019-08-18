@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WechatAuthorizationComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+    alert('wechatAuthorization constructor called');
+  }
 
   ngOnInit() {
+    alert('wechatAuthorization onInit called');
   }
 
 }

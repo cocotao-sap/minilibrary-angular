@@ -247,13 +247,13 @@ let LoginPageComponent = class LoginPageComponent {
         this.wechatRedirectPath = this.initWechatRedirectPath();
     }
     initWechatRedirectPath() {
-        let redirectPage = 'wechatAuthorization';
-        let return_uri = 'http://www.ltvision123.com/' + redirectPage;
-        let AppID = 'wx88094ad370bf30a8';
-        let scope = 'snsapi_userinfo';
-        let wechatPath = 'https://open.weixin.qq.com/connect/oauth2/authorize'
+        const redirectPage = 'wechatAuthorization';
+        const returnUri = 'http://www.ltvision123.com/' + redirectPage;
+        const AppID = 'wx88094ad370bf30a8';
+        const scope = 'snsapi_userinfo';
+        const wechatPath = 'https://open.weixin.qq.com/connect/oauth2/authorize'
             + '?appid=' + AppID
-            + '&redirect_uri=' + return_uri
+            + '&redirect_uri=' + returnUri
             + '&response_type=code'
             + '&scope=' + scope
             + '&state=STATE#wechat_redirect';
@@ -407,8 +407,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let WechatAuthorizationComponent = class WechatAuthorizationComponent {
-    constructor() { }
+    constructor() {
+        alert('wechatAuthorization constructor called');
+    }
     ngOnInit() {
+        alert('wechatAuthorization onInit called');
     }
 };
 WechatAuthorizationComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
