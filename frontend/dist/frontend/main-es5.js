@@ -418,25 +418,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WechatAuthorizationComponent", function() { return WechatAuthorizationComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+
 
 
 var WechatAuthorizationComponent = /** @class */ (function () {
-    function WechatAuthorizationComponent() {
+    function WechatAuthorizationComponent(activeRouter) {
+        this.activeRouter = activeRouter;
     }
     WechatAuthorizationComponent.prototype.ngOnInit = function () {
-        var searchParamStr = window.location.search;
-        var n = searchParamStr.indexOf('?code=') + 6;
-        var m = searchParamStr.indexOf('&state=STATE');
-        var code = searchParamStr.substr(n, m - 6);
-        console.log('[coco test]: code:' + code);
+        this.activeRouter.queryParams.subscribe(function (params) {
+            // this.queryParams = params;
+            var searchParamStr = window.location.search;
+            var n = searchParamStr.indexOf('?code=') + 6;
+            var m = searchParamStr.indexOf('&state=STATE');
+            var code = searchParamStr.substr(n, m - 6);
+            console.log('[coco test]: code:' + code);
+        });
     };
+    WechatAuthorizationComponent.ctorParameters = function () { return [
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] }
+    ]; };
     WechatAuthorizationComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-wechat-authorization',
             template: __webpack_require__(/*! raw-loader!./wechat-authorization.component.html */ "./node_modules/raw-loader/index.js!./src/app/wechat-authorization/wechat-authorization.component.html"),
             styles: [__webpack_require__(/*! ./wechat-authorization.component.less */ "./src/app/wechat-authorization/wechat-authorization.component.less")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])
     ], WechatAuthorizationComponent);
     return WechatAuthorizationComponent;
 }());
