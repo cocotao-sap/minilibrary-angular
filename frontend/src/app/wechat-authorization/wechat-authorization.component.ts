@@ -8,15 +8,15 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class WechatAuthorizationComponent implements OnInit {
 
-  private queryParams: any;
-  constructor(public activeRouter: ActivatedRoute) {
+  constructor() {
   }
 
   ngOnInit() {
-    this.activeRouter.queryParams.subscribe(params => {
-      this.queryParams = params;
-      console.log('[coco test]: queryParams:' + params as string);
-    });
+    const searchParamStr = window.location.search;
+    const n = searchParamStr.indexOf('?code=') + 6;
+    const m = searchParamStr.indexOf('&state=STATE');
+    const code = searchParamStr.substr(n, m - 6);
+    console.log('[coco test]: code:' + code as string);
   }
 
 }
