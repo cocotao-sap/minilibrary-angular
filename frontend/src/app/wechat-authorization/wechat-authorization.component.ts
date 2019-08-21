@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-wechat-authorization',
@@ -7,12 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WechatAuthorizationComponent implements OnInit {
 
-  constructor() {
-    alert('wechatAuthorization constructor called');
+  private queryParams: any;
+  constructor(public activeRouter: ActivatedRoute) {
   }
 
   ngOnInit() {
-    alert('wechatAuthorization onInit called');
+    this.activeRouter.queryParams.subscribe(params => {
+      this.queryParams = params;
+      console.log('[coco test]: queryParams:' + params as string);
+    });
   }
 
 }

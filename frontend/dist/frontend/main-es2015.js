@@ -404,23 +404,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WechatAuthorizationComponent", function() { return WechatAuthorizationComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+
 
 
 let WechatAuthorizationComponent = class WechatAuthorizationComponent {
-    constructor() {
-        alert('wechatAuthorization constructor called');
+    constructor(activeRouter) {
+        this.activeRouter = activeRouter;
     }
     ngOnInit() {
-        alert('wechatAuthorization onInit called');
+        this.activeRouter.queryParams.subscribe(params => {
+            this.queryParams = params;
+            console.log('[coco test]: queryParams:' + params);
+        });
     }
 };
+WechatAuthorizationComponent.ctorParameters = () => [
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] }
+];
 WechatAuthorizationComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-wechat-authorization',
         template: __webpack_require__(/*! raw-loader!./wechat-authorization.component.html */ "./node_modules/raw-loader/index.js!./src/app/wechat-authorization/wechat-authorization.component.html"),
         styles: [__webpack_require__(/*! ./wechat-authorization.component.less */ "./src/app/wechat-authorization/wechat-authorization.component.less")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])
 ], WechatAuthorizationComponent);
 
 
