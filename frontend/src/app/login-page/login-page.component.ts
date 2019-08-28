@@ -25,7 +25,7 @@ export class LoginPageComponent implements OnInit {
       + '&redirect_uri=' + returnUri
       + '&response_type=code'
       + '&scope=' + scope
-      + '&state=STATE#wechat_redirect';
+      + '&state=STATE&connect_redirect=1#wechat_redirect';
 
     return wechatPath;
   }

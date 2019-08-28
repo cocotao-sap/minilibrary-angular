@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div style=\"text-align:center; padding: 8px;\">\n<h1>\n  ngx-weui\n</h1>\n<p>\n  ngx-weui 是 WeUI 的 Angular 版本，\n  WeUI\n  是一套同微信原生视觉体验一致的基础样式库，由微信官方设计团队为微信内网页和微信小程序量身设计，令用户的使用感知更加统一。\n</p>\n<p>\n</p>\n<div style=\"margin-top: 16px;\">\n  <button weui-button>Button</button>\n</div>\n</div> -->\n\n<!-- <tab-navigator></tab-navigator> -->\n\n<app-login-page></app-login-page>\n<app-wechat-authorization></app-wechat-authorization>\n"
+module.exports = "<!-- <div style=\"text-align:center; padding: 8px;\">\n<h1>\n  ngx-weui\n</h1>\n<p>\n  ngx-weui 是 WeUI 的 Angular 版本，\n  WeUI\n  是一套同微信原生视觉体验一致的基础样式库，由微信官方设计团队为微信内网页和微信小程序量身设计，令用户的使用感知更加统一。\n</p>\n<p>\n</p>\n<div style=\"margin-top: 16px;\">\n  <button weui-button>Button</button>\n</div>\n</div> -->\n\n<!-- <tab-navigator></tab-navigator> -->\n\n<app-login-page></app-login-page>\n<app-wechat-authorization></app-wechat-authorization>\n<tab-navigator></tab-navigator>"
 
 /***/ }),
 
@@ -93,6 +93,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _wechat_authorization_wechat_authorization_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./wechat-authorization/wechat-authorization.component */ "./src/app/wechat-authorization/wechat-authorization.component.ts");
 /* harmony import */ var _login_page_login_page_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./login-page/login-page.component */ "./src/app/login-page/login-page.component.ts");
+/* harmony import */ var _tab_navigator_tab_navigator_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./tab-navigator/tab-navigator.component */ "./src/app/tab-navigator/tab-navigator.component.ts");
+
 
 
 
@@ -101,7 +103,8 @@ __webpack_require__.r(__webpack_exports__);
 const routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: 'login', component: _login_page_login_page_component__WEBPACK_IMPORTED_MODULE_4__["LoginPageComponent"] },
-    { path: 'wechatAuthorization', component: _wechat_authorization_wechat_authorization_component__WEBPACK_IMPORTED_MODULE_3__["WechatAuthorizationComponent"] }
+    { path: 'wechatAuthorization', component: _wechat_authorization_wechat_authorization_component__WEBPACK_IMPORTED_MODULE_3__["WechatAuthorizationComponent"] },
+    { path: 'tabNavigator', component: _tab_navigator_tab_navigator_component__WEBPACK_IMPORTED_MODULE_5__["TabNavigatorComponent"] }
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
@@ -256,7 +259,7 @@ let LoginPageComponent = class LoginPageComponent {
             + '&redirect_uri=' + returnUri
             + '&response_type=code'
             + '&scope=' + scope
-            + '&state=STATE#wechat_redirect';
+            + '&state=STATE&connect_redirect=1#wechat_redirect';
         return wechatPath;
     }
 };
@@ -409,8 +412,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let WechatAuthorizationComponent = class WechatAuthorizationComponent {
-    constructor(activeRouter) {
+    constructor(activeRouter, router) {
         this.activeRouter = activeRouter;
+        this.router = router;
     }
     ngOnInit() {
         this.activeRouter.queryParams.subscribe(params => {
@@ -420,11 +424,15 @@ let WechatAuthorizationComponent = class WechatAuthorizationComponent {
             const m = searchParamStr.indexOf('&state=STATE');
             const code = searchParamStr.substr(n, m - 6);
             console.log('[coco test]: code:' + code);
+            if (code.length > 0) {
+                this.router.navigate(['/tabNavigator']);
+            }
         });
     }
 };
 WechatAuthorizationComponent.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
 ];
 WechatAuthorizationComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -432,7 +440,8 @@ WechatAuthorizationComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"](
         template: __webpack_require__(/*! raw-loader!./wechat-authorization.component.html */ "./node_modules/raw-loader/index.js!./src/app/wechat-authorization/wechat-authorization.component.html"),
         styles: [__webpack_require__(/*! ./wechat-authorization.component.less */ "./src/app/wechat-authorization/wechat-authorization.component.less")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
 ], WechatAuthorizationComponent);
 
 

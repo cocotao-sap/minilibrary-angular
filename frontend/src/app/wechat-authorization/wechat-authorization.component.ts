@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-wechat-authorization',
@@ -8,7 +8,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class WechatAuthorizationComponent implements OnInit {
 
-  constructor(public activeRouter: ActivatedRoute) {
+  constructor(
+    private activeRouter: ActivatedRoute,
+    private router: Router,
+    ) {
   }
 
   ngOnInit() {
@@ -19,6 +22,11 @@ export class WechatAuthorizationComponent implements OnInit {
       const m = searchParamStr.indexOf('&state=STATE');
       const code = searchParamStr.substr(n, m - 6);
       console.log('[coco test]: code:' + code as string);
+
+      if (code.length > 0) {
+        this.router.navigate(['/tabNavigator']);
+      }
+
     });
   }
 

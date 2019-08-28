@@ -8,16 +8,14 @@ var AppSecret = '3234fab4aa682d5d082e74e3099414ed';
 
 router.prefix('/wechat')
 
+// Frontend UI will do this
 router.get('/wxlogin', async (ctx, next) => {
   console.log("oauth - login")
 
   // 第一步：用户同意授权，获取code
   var redirectUri = 'getaccesstoken';
   // 这是编码后的地址
-  // var return_uri = 'http%3A%2F%2F148.70.236.60%2Findex%2F' + redirectUri;
   var return_uri = 'http%3A%2F%2Fwww.ltvision123.com%2Fwechat%2F' + redirectUri;
-  // var return_uri = 'http%3A%2F%2F127.0.0.1%2Fwechat%2F' + redirectUri;
-  // var return_uri = 'http%3A%2F%2Fwww.ltvision123.com%2F' + redirectUri;
   var scope = 'snsapi_userinfo';
 
   ctx.response.redirect('https://open.weixin.qq.com/connect/oauth2/authorize'
@@ -28,39 +26,60 @@ router.get('/wxlogin', async (ctx, next) => {
     + '&state=STATE#wechat_redirect');
 })
 
-router.get('/userinfo', async (ctx, next) => {
-  // console.log("get_wx_access_token")
-  // console.log("code_return: " + ctx.query.code)
-
+router.get('/wechatToken', async (ctx, next) => {
   // 第二步：通过code换取网页授权access_token
-  var code = ctx.query.code;
+  let code = ctx.query.code;
+  let res =  await getWechatToken(code);
+  if (res) {
+    ctx.body = {
+      access_token: res.access_token,
+      openid: res.openid,
+      createTime: res.createTime
+    }
+  }
+})
 
-  await superagent.get('https://api.weixin.qq.com/sns/oauth2/access_token' 
-    + '?appid=' + AppID 
-    + '&secret=' + AppSecret 
-    + '&code=' + code 
-    + '&grant_type=authorization_code')
-    .then(res => {
+async function getWechatToken(code) {
+  let res = await superagent.get('https://api.weixin.qq.com/sns/oauth2/access_token' 
+  + '?appid=' + AppID 
+  + '&secret=' + AppSecret 
+  + '&code=' + code 
+  + '&grant_type=authorization_code'); 
+  if (res && res.text.length > 0) {
       // 此处本来应该用res.body获取返回的json数据，但总是获取不到，只能用text代替
-      let result = JSON.parse(res.text)
-      access_token = result.access_token
-      openid = result.openid
-    })
-    .catch(res => {
-      console.log(res)
-    })
+      let result = JSON.parse(res.text);
+      // window.localStorage.accessToken = result.access_token;
+      // window.localStorage.openid = result.openid;
+      return Promise.resolve({
+        access_token: result.access_token,
+        openid: result.openid,
+        createTime: new Date()
+      });
+  } else {
+    return Promise.reject(null);
+  }
+}
 
+async function checkWechatToken(token) {
+  return false;
+}
+
+router.get('/checkWechatToken', async(ctx, next) => {
   // 3、刷新access_token（如果需要）
-  // 4、拉去用户信息
+})
+
+router.get('/userinfo', async (ctx, next) => {
+  // 4、拉用户信息
+  let access_token = ctx.header.access_token;
+  let openid = ctx.header.openid;
   let res = await superagent.get(
     'https://api.weixin.qq.com/sns/userinfo?access_token=' + access_token +
       '&openid=' + openid +
       '&lang=zh_CN');
-  let userInfo = JSON.parse(res.text)
-    ctx.body = {
+  let userInfo = JSON.parse(res.text);
+  ctx.body = {
       state: 1,
-      userInfo: userInfo,
-      accessToken: access_token
+      userInfo: userInfo
   }
 })
 
